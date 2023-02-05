@@ -1,4 +1,5 @@
-import "./categories.styles.scss";
+import CategoryItem from "./components/category-item/category-item.component";
+import "./components/category-item/category-item.styles.scss";
 const App = () => {
   const categories = [
     {
@@ -29,18 +30,8 @@ const App = () => {
   ];
   return (
     <div className="categories-wrapper">
-      {categories.map(({ title, id, imageUrl }) => (
-        //{ title } =destructuring instead of 'category'
-        <div key={id} className="category-wrapper">
-          <div
-            className="background-image"
-            style={{ backgroundImage: `url(${imageUrl})` }}
-          />
-          <div className="category-body-wrapper">
-            <h2>{title}</h2>
-            <p>Shop Now</p>
-          </div>
-        </div>
+      {categories.map((category) => (
+        <CategoryItem key={category.id} category={category} />
       ))}
     </div>
   );
