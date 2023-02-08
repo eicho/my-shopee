@@ -1,5 +1,5 @@
 import { useState } from "react"; //to track actual input inside of these inputs into form component.
-
+import FormInput from "../form-input/form-input.component";
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
@@ -58,14 +58,20 @@ const SignUpForm = () => {
 
   return (
     <div className="sign-up-wrapper">
-      <h2>Don't have an account?</h2>
-      <span>Sign up with your email and password</span>
+      <h1>Sign up with your email and password</h1>
       {/* 'name' must same as the name of actual attribute from 'defaultFormFields' that updated.
         'value' inside of this input should be the value that passed.
     */}
       <form onSubmit={handleSubmit}>
-        <label>Display Name</label>
-        <input
+        {/*<FormInput
+          label="Display Name"
+          inputOptions = {{ type:"text",
+          required: true,
+          onChange:handleChange,
+          name:"displayName",
+          value:displayName}}
+      />*/}
+        <FormInput
           label="Display Name"
           type="text"
           required
@@ -73,9 +79,8 @@ const SignUpForm = () => {
           name="displayName"
           value={displayName}
         />
-        <br />
-        <label>Email</label>
-        <input
+
+        <FormInput
           label="Email"
           type="email"
           required
@@ -83,9 +88,8 @@ const SignUpForm = () => {
           name="email"
           value={email}
         />
-        <br />
-        <label>Password</label>
-        <input
+
+        <FormInput
           label="Password"
           type="password"
           required
@@ -93,9 +97,8 @@ const SignUpForm = () => {
           name="password"
           value={password}
         />
-        <br />
-        <label>Confirm Password</label>
-        <input
+
+        <FormInput
           label="Confirm Password"
           type="password"
           required
@@ -103,7 +106,7 @@ const SignUpForm = () => {
           name="confirmPassword"
           value={confirmPassword}
         />
-        <br />
+
         <button type="submit">Sign Up</button>
       </form>
     </div>
