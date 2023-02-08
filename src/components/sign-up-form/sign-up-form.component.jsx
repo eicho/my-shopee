@@ -64,7 +64,8 @@ const SignUpForm = () => {
         'value' inside of this input should be the value that passed.
     */}
       <form onSubmit={handleSubmit}>
-        {/*<input
+        <label>Display Name</label>
+        <input
           label="Display Name"
           type="text"
           required
@@ -72,6 +73,8 @@ const SignUpForm = () => {
           name="displayName"
           value={displayName}
         />
+        <br />
+        <label>Email</label>
         <input
           label="Email"
           type="email"
@@ -80,6 +83,8 @@ const SignUpForm = () => {
           name="email"
           value={email}
         />
+        <br />
+        <label>Password</label>
         <input
           label="Password"
           type="password"
@@ -88,6 +93,8 @@ const SignUpForm = () => {
           name="password"
           value={password}
         />
+        <br />
+        <label>Confirm Password</label>
         <input
           label="Confirm Password"
           type="password"
@@ -95,7 +102,8 @@ const SignUpForm = () => {
           onChange={handleChange}
           name="confirmPassword"
           value={confirmPassword}
-  />*/}
+        />
+        <br />
         <button type="submit">Sign Up</button>
       </form>
     </div>
