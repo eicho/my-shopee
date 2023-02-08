@@ -1,5 +1,6 @@
 import { useState } from "react"; //to track actual input inside of these inputs into form component.
 import FormInput from "../form-input/form-input.component";
+import Button from "../button/button.component";
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
@@ -58,7 +59,8 @@ const SignUpForm = () => {
 
   return (
     <div className="sign-up-wrapper">
-      <h1>Sign up with your email and password</h1>
+      <h2>Don't have an account?</h2>
+      <span>Sign up with your email and password</span>
       {/* 'name' must same as the name of actual attribute from 'defaultFormFields' that updated.
         'value' inside of this input should be the value that passed.
     */}
@@ -106,8 +108,10 @@ const SignUpForm = () => {
           name="confirmPassword"
           value={confirmPassword}
         />
-
-        <button type="submit">Sign Up</button>
+        <Button type="submit">
+          {/*<Button buttonType="inverted" type="submit">*/}
+          Sign Up
+        </Button>
       </form>
     </div>
   );
