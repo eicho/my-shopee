@@ -4,12 +4,19 @@ import { Outlet, Link } from "react-router-dom";
 import { ReactComponent as ShopLogo } from "../../assets/shopee.svg";
 
 import { UserContext } from "../../contexts/user.context";
+import { signOutUser } from "../../utils/firebase/firebase.utils";
 
 import "./navigation.styles.scss";
 
 const Navigation = () => {
-  const { currentUser } = useContext(UserContext);
-  console.log(currentUser);
+  const { currentUser, setCurrentUser } = useContext(UserContext);
+  // console.log(currentUser);
+
+  const signOutHandler = async () => {
+    await signOutUser();
+    setCurrentUser(null); //if click sign out, reset the context.
+  };
+
   return (
     <Fragment>
       <div className="navigation">
@@ -20,9 +27,18 @@ const Navigation = () => {
           <Link className="nav-link" to="/shop">
             SHOP
           </Link>
-          <Link className="nav-link" to="/auth">
-            SIGN IN
-          </Link>
+          {/* If the current user does not exist,render 'sign in' link.
+        when signin or signup the form,render 'sign out' link*/}
+          {currentUser ? (
+            <span className="nav-link" onClick={signOutHandler}>
+              {" "}
+              SIGN OUT{" "}
+            </span>
+          ) : (
+            <Link className="nav-link" to="/auth">
+              SIGN IN
+            </Link>
+          )}
         </div>
       </div>
       <Outlet />

@@ -1,10 +1,11 @@
-import { useState } from "react"; //to track actual input inside of these inputs into form component.
+import { useState, useContext } from "react"; //to track actual input inside of these inputs into form component.
 import FormInput from "../form-input/form-input.component";
 import Button from "../button/button.component";
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
 } from "../../utils/firebase/firebase.utils";
+import { UserContext } from "../../contexts/user.context";
 
 import "./sign-up-form.styles.scss";
 
@@ -20,6 +21,13 @@ const SignUpForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields); //useState to call form fields
   const { displayName, email, password, confirmPassword } = formFields; //destructure to use values somewhere inside of code
   // console.log(formFields);
+
+  //signup form is hooked into the 'context' using 'use context',so,as long as 'user context' value change,rerun the function
+  // const val = useContext(UserContext);
+  // console.log("hit");
+
+  //pull this off of 'use context' from 'user context'
+  const { setCurrentUser } = useContext(UserContext);
 
   const resetFormFields = () => {
     setFormFields(defaultFormFields);
@@ -41,6 +49,9 @@ const SignUpForm = () => {
 
       await createUserDocumentFromAuth(user, { displayName });
       resetFormFields();
+
+      //whenever a user signs up for the first time, going to have their user set inside of our user context.
+      setCurrentUser(user);
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {
         alert("Cannot create user, email already in use");
