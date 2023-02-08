@@ -7,6 +7,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
+  onAuthStateChanged,
 } from "firebase/auth";
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 
@@ -46,6 +47,7 @@ export const createUserDocumentFromAuth = async (
 
   const userSnapshot = await getDoc(userDocRef);
 
+  //if 'userSnapshot' doesn't exist, then we create a new instance in our database
   if (!userSnapshot.exists()) {
     const { displayName, email } = userAuth;
     const createdAt = new Date(); //to know when user signin
@@ -62,7 +64,7 @@ export const createUserDocumentFromAuth = async (
     }
   }
 
-  return userDocRef;
+  return userDocRef; //get back a valid 'userDocRef'
 };
 
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
@@ -78,3 +80,7 @@ export const signInAuthUserWithEmailAndPassword = async (email, password) => {
 };
 
 export const signOutUser = async () => await signOut(auth);
+
+export const onAuthStateChangedListener = (callback) =>
+  //two parameters,'auth','callback' that you want to call every time this 'auth state' changes.
+  onAuthStateChanged(auth, callback);
