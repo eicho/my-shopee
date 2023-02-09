@@ -1,5 +1,6 @@
 //import in the cart context as well as the use context hook so that we can access
 import { useContext } from "react";
+import CartItem from "../../components/cart-item/cart-item.component";
 
 import { CartContext } from "../../contexts/cart.context";
 
@@ -8,7 +9,8 @@ import { CartContext } from "../../contexts/cart.context";
 import "./checkout.styles.scss";
 
 const Checkout = () => {
-  const { cartItems } = useContext(CartContext);
+  const { cartItems, addItemToCart, removeItemToCart, cartTotal } =
+    useContext(CartContext);
 
   return (
     <div className="checkout-wrapper">
@@ -18,6 +20,10 @@ const Checkout = () => {
           <div key={id}>
             <h2>{name}</h2>
             <span>{quantity}</span>
+            <br />
+            <span onClick={() => removeItemToCart(cartItem)}>decrement</span>
+            <br />
+            <span onClick={() => addItemToCart(cartItem)}>increment</span>
           </div>
         );
       })}
