@@ -1,5 +1,5 @@
 //to store some kind of true false state of whether or not the card is open or not.
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 
 //to help me find inside of my existing array any items that exist that match the ID of this product.
 export const addCartItem = (cartItems, productToAdd) => {
@@ -26,6 +26,7 @@ export const CartContext = createContext({
   setIsOpen: () => {},
   cartItems: [],
   addItemToCart: () => {},
+  cartItemCount: 0,
 });
 
 export const CartProvider = ({ children }) => {
@@ -34,11 +35,29 @@ export const CartProvider = ({ children }) => {
   //initialize the cart items and then the set cart items.
   const [cartItems, setCartItems] = useState([]);
 
+  const [cartItemCount, setCartItemCount] = useState(0); //default is 0
+
+  //recounting the total quantity every time the cart items 'cartItems' changes.
+  useEffect(() => {
+    //reduce(callback,starting value)
+    const count = cartItems.reduce(
+      (total, cartItem) => total + cartItem.quantity,
+      0
+    );
+    setCartItemCount(count);
+  }, [cartItems]);
+
   //function that triggers whenever a user clicks on this add to cart.
   const addItemToCart = (product) =>
     setCartItems(addCartItem(cartItems, product));
 
-  const value = { isCartOpen, setIsCartOpen, cartItems, addItemToCart };
+  const value = {
+    isCartOpen,
+    setIsCartOpen,
+    cartItems,
+    addItemToCart,
+    cartItemCount,
+  };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 };
