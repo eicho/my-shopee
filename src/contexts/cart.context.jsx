@@ -40,13 +40,19 @@ const removeCartItem = (cartItems, cartItemToRemove) => {
   );
 };
 
+//if the item trying to clear out from the cards is equal to the card that's already there, filter it out completely.
+const clearCartItem = (cartItems, cartItemToClear) =>
+  cartItems.filter((cartItem) => cartItem.id !== cartItemToClear.id);
+
 export const CartContext = createContext({
   isCartOpen: false,
-  setIsOpen: () => {},
+  setIsCartOpen: () => {},
   cartItems: [],
   addItemToCart: () => {},
-  cartItemCount: 0,
   removeItemFromCart: () => {},
+  clearItemFromCart: () => {},
+  cartCount: 0,
+  cartTotal: 0,
 });
 
 export const CartProvider = ({ children }) => {
@@ -56,6 +62,8 @@ export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
 
   const [cartItemCount, setCartItemCount] = useState(0); //default is 0
+
+  const [cartTotal, setCartTotal] = useState(0);
 
   //recounting the total quantity every time the cart items 'cartItems' changes.
   useEffect(() => {
@@ -67,6 +75,14 @@ export const CartProvider = ({ children }) => {
     setCartItemCount(count);
   }, [cartItems]);
 
+  useEffect(() => {
+    const newCartTotal = cartItems.reduce(
+      (total, cartItem) => total + cartItem.quantity * cartItem.price,
+      0
+    );
+    setCartTotal(newCartTotal);
+  }, [cartItems]);
+
   //function that triggers whenever a user clicks on this add to cart.
   const addItemToCart = (product) =>
     setCartItems(addCartItem(cartItems, product));
@@ -75,13 +91,19 @@ export const CartProvider = ({ children }) => {
     setCartItems(removeCartItem(cartItems, cartItemToRemove));
   };
 
+  const clearItemFromCart = (cartItemToClear) => {
+    setCartItems(clearCartItem(cartItems, cartItemToClear));
+  };
+
   const value = {
     isCartOpen,
     setIsCartOpen,
     cartItems,
     addItemToCart,
     removeItemToCart,
+    clearItemFromCart,
     cartItemCount,
+    cartTotal,
   };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
