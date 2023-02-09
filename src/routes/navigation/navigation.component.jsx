@@ -6,6 +6,7 @@ import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component
 import { ReactComponent as ShopLogo } from "../../assets/shopee.svg";
 
 import { UserContext } from "../../contexts/user.context";
+import { CartContext } from "../../contexts/cart.context";
 import { signOutUser } from "../../utils/firebase/firebase.utils";
 
 import "./navigation.styles.scss";
@@ -19,6 +20,8 @@ const Navigation = () => {
   //   setCurrentUser(null); //if click sign out, reset the context.
   // };
   const { currentUser } = useContext(UserContext);
+  const { isCartOpen } = useContext(CartContext);
+
   return (
     <Fragment>
       <div className="navigation">
@@ -43,7 +46,9 @@ const Navigation = () => {
           )}
           <CartIcon />
         </div>
-        <CartDropdown />
+        {/* && to evaluate as true, both the left side and the right side,
+        cart open to be true, return the cart dropdown.*/}
+        {isCartOpen && <CartDropdown />}
       </div>
       <Outlet />
     </Fragment>
