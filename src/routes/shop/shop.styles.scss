@@ -1,5 +1,6 @@
 .products-wrapper {
   display: grid;
+  //repeat four times one fr (one evenly distributed and equidistant size)
   grid-template-columns: repeat(4, 1fr);
   column-gap: 10px;
   row-gap: 50px;
