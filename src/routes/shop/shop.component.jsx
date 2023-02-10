@@ -1,25 +1,27 @@
-import { useContext, Fragment } from "react";
-
-import CategoryPreview from "../../components/category-preview/category-preview.component";
-
-import { CategoriesContext } from "../../contexts/categories.context";
-
+//cannot use a route component unless its immediate parent is a route component from React Router Dom.
+import { Routes, Route } from "react-router";
+import CategoriesPreview from "../categories-preview/categories-preview.component";
 import "./shop.styles.scss";
 
 const Shop = () => {
   //fetch those 'products' down from our outside third party API, and then access it in these different components that need them.
   //product context, to make this plural products context.
-  const { categoriesMap } = useContext(CategoriesContext);
+  //const { categoriesMap } = useContext(CategoriesContext);
 
   return (
-    <div className="shop-wrapper">
-      {Object.keys(categoriesMap).map((title) => {
-        const products = categoriesMap[title];
-        return (
-          <CategoryPreview key={title} title={title} products={products} />
-        );
-      })}
-    </div>
+    <Routes>
+      {/* for any subsequent children routes that get nested */}
+      <Route index element={<CategoriesPreview />} />
+    </Routes>
+
+    // <div className="shop-wrapper">
+    //   {Object.keys(categoriesMap).map((title) => {
+    //     const products = categoriesMap[title];
+    //     return (
+    //       <CategoryPreview key={title} title={title} products={products} />
+    //     );
+    //   })}
+    // </div>
   );
 };
 
