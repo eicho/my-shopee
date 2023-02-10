@@ -1,6 +1,8 @@
 //cannot use a route component unless its immediate parent is a route component from React Router Dom.
 import { Routes, Route } from "react-router";
 import CategoriesPreview from "../categories-preview/categories-preview.component";
+import Category from "../category/category.component";
+
 import "./shop.styles.scss";
 
 const Shop = () => {
@@ -12,6 +14,8 @@ const Shop = () => {
     <Routes>
       {/* for any subsequent children routes that get nested */}
       <Route index element={<CategoriesPreview />} />
+      {/* semicolon and then the name of the variable */}
+      <Route path=":category" element={<Category />} />
     </Routes>
 
     // <div className="shop-wrapper">
