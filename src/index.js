@@ -4,7 +4,7 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import { UserProvider } from "./contexts/user.context";
-import { ProductsProvider } from "./contexts/products.context";
+import { CategoriesProvider } from "./contexts/categories.context";
 import { CartProvider } from "./contexts/cart.context";
 import reportWebVitals from "./reportWebVitals";
 import "./index.scss";
@@ -15,11 +15,11 @@ root.render(
       {/* any component inside 'user provide' nested deep within the app can access the 'context' value inside of provider itself*/}
       <UserProvider>
         {/* the products are able to reach up into the user provider and get the value */}
-        <ProductsProvider>
+        <CategoriesProvider>
           <CartProvider>
             <App />
           </CartProvider>
-        </ProductsProvider>
+        </CategoriesProvider>
       </UserProvider>
     </BrowserRouter>
   </React.StrictMode>
