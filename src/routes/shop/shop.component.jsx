@@ -1,6 +1,6 @@
 import { useContext, Fragment } from "react";
 
-import ProductCard from "../../components/product-card/product-card.component";
+import CategoryPreview from "../../components/category-preview/category-preview.component";
 
 import { CategoriesContext } from "../../contexts/categories.context";
 
@@ -12,47 +12,15 @@ const Shop = () => {
   const { categoriesMap } = useContext(CategoriesContext);
 
   return (
-    // iterate through this different items array to show the first four items for preview.
-    <Fragment>
-      {/* return back an array of the keys.*/}
-      {Object.keys(categoriesMap).map((title) => (
-        <Fragment key={title}>
-          <h2>{title}</h2>
-          <div className="products-wrapper">
-            {/* to give the corresponding value of the associated array of products. */}
-            {categoriesMap[title].map((product) => (
-              <ProductCard key={product.id} product={product} />
-            ))}
-
-            {/* {products.map((product) => (
-        //'product' from 'product-card' component
-        <ProductCard key={product.id} product={product} />
-      ))}*/}
-
-            {/* 
-      {products.map(({ id, name }) => (
-        <div>
-          <h1>{name}</h1>
-        </div>
-      ))}
-      */}
-          </div>
-        </Fragment>
-      ))}
-    </Fragment>
+    <div className="shop-wrapper">
+      {Object.keys(categoriesMap).map((title) => {
+        const products = categoriesMap[title];
+        return (
+          <CategoryPreview key={title} title={title} products={products} />
+        );
+      })}
+    </div>
   );
 };
-// import SHOP_DATA from "../../shop-data.json";
 
-// const Shop = () => {
-//   return (
-//     <div key="{id}">
-//       {SHOP_DATA.map(({ id, name }) => (
-//         <div>
-//           <h1>{name}</h1>
-//         </div>
-//       ))}
-//     </div>
-//   );
-// };
 export default Shop;
