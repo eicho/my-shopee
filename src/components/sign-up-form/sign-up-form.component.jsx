@@ -9,7 +9,8 @@ import {
 } from "../../utils/firebase/firebase.utils";
 // import { UserContext } from "../../contexts/user.context";
 
-import "./sign-up-form.styles.scss";
+// import "./sign-up-form.styles.scss";
+import { SignUpContainer } from "./sign-up-form.styles";
 
 //initialize value for four values,which should be all empty strings,to generic size 'handleChange'
 const defaultFormFields = {
@@ -71,7 +72,7 @@ const SignUpForm = () => {
   };
 
   return (
-    <div className="sign-up-wrapper">
+    <SignUpContainer>
       <h2>Don't have an account?</h2>
       <span>Sign up with your email and password</span>
       {/* 'name' must same as the name of actual attribute from 'defaultFormFields' that updated.
@@ -126,7 +127,7 @@ const SignUpForm = () => {
           Sign Up
         </Button>
       </form>
-    </div>
+    </SignUpContainer>
   );
 };
 
