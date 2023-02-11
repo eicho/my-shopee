@@ -26,7 +26,7 @@ export const CategoriesProvider = ({ children }) => {
     const getCategoriesMap = async () => {
       const categoryMap = await getCategoriesAndDocuments("collections"); //get products and categories from firestore
       setCategoriesMap(categoryMap);
-      console.log(categoryMap);
+      // console.log(categoryMap);
     };
     getCategoriesMap();
   }, []);
