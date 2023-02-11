@@ -9,7 +9,8 @@ import {
   signInAuthUserWithEmailAndPassword,
 } from "../../utils/firebase/firebase.utils";
 
-import "./sign-in-form.styles.scss";
+// import "./sign-in-form.styles.scss";
+import { SignInContainer, ButtonsContainer } from "./sign-in-form.styles";
 
 //initialize value for four values,which should be all empty strings,to generic size 'handleChange'
 const defaultFormFields = {
@@ -71,7 +72,7 @@ const SignInForm = () => {
   };
 
   return (
-    <div className="sign-in-wrapper">
+    <SignInContainer>
       <h2>Already have an account?</h2>
       <span>Sign in with your email and password</span>
       {/* 'name' must same as the name of actual attribute from 'defaultFormFields' that updated.
@@ -104,7 +105,7 @@ const SignInForm = () => {
           name="password"
           value={password}
         />
-        <div className="button-container">
+        <ButtonsContainer>
           <Button type="submit">Sign In</Button>
           {/* default 'button' are of type submit inside of forms.to prevent that,say that type of 'button' is just the button*/}
           <Button
@@ -114,9 +115,9 @@ const SignInForm = () => {
           >
             Sign In With Google
           </Button>
-        </div>
+        </ButtonsContainer>
       </form>
-    </div>
+    </SignInContainer>
   );
 };
 
