@@ -1,10 +1,11 @@
 import { useState } from "react"; //to track actual input inside of these inputs into form component.
 // import { useState, useContext } from "react";
 import FormInput from "../form-input/form-input.component";
-import Button, { BUTTON_TYPE_CLASSES } from "../button/button.component";
+// import Button, { BUTTON_TYPE_CLASSES } from "../button/button.component";
+import Button from "../button/button.component";
 // import { UserContext } from "../../contexts/user.context";
 import {
-  signInWithGooglePopup,
+  // signInWithGooglePopup,
   //createUserDocumentFromAuth,
   signInAuthUserWithEmailAndPassword,
 } from "../../utils/firebase/firebase.utils";
@@ -30,12 +31,12 @@ const SignInForm = () => {
   };
 
   // Google Method, taking this user object that we get back from the authentication and create a user document from this auth object.
-  const signInWithGoogle = async () => {
-    // const { user } = await signInWithGooglePopup();
-    // await createUserDocumentFromAuth(user);
+  // const signInWithGoogle = async () => {
+  //   // const { user } = await signInWithGooglePopup();
+  //   // await createUserDocumentFromAuth(user);
 
-    await signInWithGooglePopup();
-  };
+  //   await signInWithGooglePopup();
+  // };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -105,13 +106,13 @@ const SignInForm = () => {
         <ButtonsContainer>
           <Button type="submit">Sign In</Button>
           {/* default 'button' are of type submit inside of forms.to prevent that,say that type of 'button' is just the button*/}
-          <Button
+          {/* <Button
             type="button"
             onClick={signInWithGoogle}
             buttonType={BUTTON_TYPE_CLASSES.google}
           >
             Sign In With Google
-          </Button>
+          </Button>*/}
         </ButtonsContainer>
       </form>
     </SignInContainer>
