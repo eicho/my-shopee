@@ -5,7 +5,7 @@ import Button, { BUTTON_TYPE_CLASSES } from "../button/button.component";
 // import { UserContext } from "../../contexts/user.context";
 import {
   signInWithGooglePopup,
-  createUserDocumentFromAuth,
+  //createUserDocumentFromAuth,
   signInAuthUserWithEmailAndPassword,
 } from "../../utils/firebase/firebase.utils";
 
@@ -41,10 +41,7 @@ const SignInForm = () => {
     event.preventDefault();
 
     try {
-      const { user } = await signInAuthUserWithEmailAndPassword(
-        email,
-        password
-      );
+      await signInAuthUserWithEmailAndPassword(email, password);
       //console.log(response); //result = get value of accessToken,uid (same like uid from firebase database)
 
       // setCurrentUser(user); //whenever 'user' value come back,to access it inside of navigation

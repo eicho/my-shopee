@@ -1,6 +1,6 @@
 //import in the cart context as well as the use context hook so that we can access
 import { useContext } from "react";
-import CartItem from "../../components/cart-item/cart-item.component";
+// import CartItem from "../../components/cart-item/cart-item.component";
 
 import { CartContext } from "../../contexts/cart.context";
 
